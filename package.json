@@ -1,6 +1,26 @@
 {
+  "name": "xyz-university-portal",
+  "version": "1.0.0",
+  "description": "Student portal web application for XYZ University",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
   "dependencies": {
     "express": "^4.21.2",
     "mongodb": "^6.13.0"
-  }
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mksinha01/xyz-university-portal.git"
+  },
+  "author": "mksinha01",
+  "license": "MIT"
 }
