@@ -1,4 +1,4 @@
-# 🐳 Docker Test App — Apna College
+# 🐳 Docker Test App - Apna College
 
 This repository is a simple **Docker-based Node.js application** created for learning and practicing containerization concepts taught in **Apna College**.  
 It demonstrates how to use Docker for building, running, and managing a Node.js app, along with MongoDB integration via Docker Compose.
