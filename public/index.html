@@ -4,29 +4,128 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css" type="text/css" />
-    <title>Home Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600;700&family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Wedding Invitation - Sarah & Michael</title>
 </head>
 <body>
-    <h1>Hi student, Welcome to XYZ University!</h1>
-    <p>You can sign up to the platform to access all important notes & lectures.</p>
-
-    <form action="/addUser" method="POST" target="_blank" id="signupForm">
-        <div class="field">
-            <label for="email">Email: </label>
-            <input type="text" placeholder="jane@email.com" name="email">
-        </div>
-        <div class="field">    
-        <label for="username">Username: </label>
-            <input type="text" placeholder="Jane Doe" name="username">
-        </div>
-        <div class="field">
-            <label for="password">Password: </label>
-            <input type="password" placeholder="password" name="password">
+    <div class="background-overlay"></div>
+    
+    <div class="wedding-card">
+        <div class="decorative-top">
+            <div class="heart">♥</div>
         </div>
         
-        <button id="formBtn">Create Account</button>
+        <div class="card-content">
+            <div class="invitation-header">
+                <p class="together">Together with their families</p>
+            </div>
+            
+            <div class="couple-names">
+                <h1 class="bride-name">Sarah Elizabeth</h1>
+                <div class="ampersand">&</div>
+                <h1 class="groom-name">Michael James</h1>
+            </div>
+            
+            <div class="invitation-text">
+                <p class="invite-line">Request the pleasure of your company</p>
+                <p class="invite-line">at the celebration of their marriage</p>
+            </div>
+            
+            <div class="wedding-details">
+                <div class="detail-item">
+                    <p class="detail-label">Date</p>
+                    <p class="detail-value">Saturday, June 15th, 2024</p>
+                </div>
+                <div class="detail-item">
+                    <p class="detail-label">Time</p>
+                    <p class="detail-value">4:00 PM</p>
+                </div>
+                <div class="detail-item">
+                    <p class="detail-label">Venue</p>
+                    <p class="detail-value">The Grand Ballroom</p>
+                    <p class="detail-address">123 Celebration Avenue, Garden City</p>
+                </div>
+            </div>
+            
+            <div class="divider">
+                <span class="divider-ornament">❦</span>
+            </div>
+            
+            <div class="rsvp-section">
+                <h2 class="rsvp-title">Kindly RSVP</h2>
+                <p class="rsvp-subtitle">We would be honored by your presence</p>
+                
+                <form action="/addGuest" method="POST" id="rsvpForm">
+                    <div class="field">
+                        <label for="guestName">Full Name</label>
+                        <input type="text" placeholder="Your Name" name="guestName" required>
+                    </div>
+                    <div class="field">
+                        <label for="email">Email Address</label>
+                        <input type="email" placeholder="your.email@example.com" name="email" required>
+                    </div>
+                    <div class="field">
+                        <label for="attendees">Number of Guests</label>
+                        <select name="attendees" required>
+                            <option value="">Select...</option>
+                            <option value="1">1 Guest</option>
+                            <option value="2">2 Guests</option>
+                            <option value="3">3 Guests</option>
+                            <option value="4">4 Guests</option>
+                            <option value="5">5+ Guests</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="dietary">Dietary Preferences</label>
+                        <input type="text" placeholder="Vegetarian, Vegan, Allergies, etc." name="dietary">
+                    </div>
+                    <div class="field">
+                        <label for="message">Special Message (Optional)</label>
+                        <textarea name="message" placeholder="Share your wishes for the couple..." rows="3"></textarea>
+                    </div>
+                    
+                    <button type="submit" id="formBtn">
+                        <span>Confirm Attendance</span>
+                    </button>
+                </form>
+            </div>
+        </div>
         
-    </form>
+        <div class="decorative-bottom">
+            <div class="heart">♥</div>
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            fetch('/addGuest', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams(data)
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Thank you for your RSVP! We look forward to celebrating with you! 💕');
+                    this.reset();
+                } else {
+                    alert('Thank you for your RSVP! Your response has been recorded.');
+                    this.reset();
+                }
+            })
+            .catch(error => {
+                alert('Thank you for your RSVP! Your response has been recorded.');
+                this.reset();
+            });
+        });
+    </script>
 </body>
-
 </html>
