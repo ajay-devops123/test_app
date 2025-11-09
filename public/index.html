@@ -4,29 +4,167 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css" type="text/css" />
-    <title>Home Page</title>
+    <title>Social Media Blocker - Stay Focused</title>
 </head>
 <body>
-    <h1>Hi student, Welcome to XYZ University!</h1>
-    <p>You can sign up to the platform to access all important notes & lectures.</p>
+    <div class="container">
+        <header>
+            <h1>🛡️ Social Media Blocker</h1>
+            <p class="subtitle">Block distractions. Stay focused. Get things done.</p>
+        </header>
 
-    <form action="/addUser" method="POST" target="_blank" id="signupForm">
-        <div class="field">
-            <label for="email">Email: </label>
-            <input type="text" placeholder="jane@email.com" name="email">
+        <div class="main-content">
+            <!-- Timer Section -->
+            <section class="timer-section">
+                <h2>Focus Timer</h2>
+                <div class="timer-display" id="timerDisplay">00:00</div>
+                <div class="timer-status" id="timerStatus">Ready to focus</div>
+                
+                <div class="timer-presets">
+                    <button class="preset-btn" data-minutes="25">25 min</button>
+                    <button class="preset-btn" data-minutes="50">50 min</button>
+                    <button class="preset-btn" data-minutes="90">90 min</button>
+                </div>
+
+                <div class="custom-timer">
+                    <input type="number" id="customMinutes" placeholder="Custom minutes" min="1" max="240">
+                    <button id="setCustomTimer">Set</button>
+                </div>
+
+                <div class="timer-controls">
+                    <button id="startTimer" class="btn-primary">Start Focus Session</button>
+                    <button id="stopTimer" class="btn-secondary" disabled>Stop</button>
+                </div>
+            </section>
+
+            <!-- Blocked Sites Section -->
+            <section class="blocked-sites-section">
+                <h2>Social Media Sites</h2>
+                <p class="section-description">Toggle to block/unblock sites during focus sessions</p>
+                
+                <div class="sites-grid" id="sitesGrid">
+                    <!-- Popular social media sites -->
+                    <div class="site-card" data-site="facebook.com">
+                        <div class="site-info">
+                            <span class="site-icon">📘</span>
+                            <span class="site-name">Facebook</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" class="site-toggle">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="site-card" data-site="twitter.com">
+                        <div class="site-info">
+                            <span class="site-icon">🐦</span>
+                            <span class="site-name">Twitter/X</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" class="site-toggle">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="site-card" data-site="instagram.com">
+                        <div class="site-info">
+                            <span class="site-icon">📷</span>
+                            <span class="site-name">Instagram</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" class="site-toggle">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="site-card" data-site="tiktok.com">
+                        <div class="site-info">
+                            <span class="site-icon">🎵</span>
+                            <span class="site-name">TikTok</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" class="site-toggle">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="site-card" data-site="youtube.com">
+                        <div class="site-info">
+                            <span class="site-icon">▶️</span>
+                            <span class="site-name">YouTube</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" class="site-toggle">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="site-card" data-site="reddit.com">
+                        <div class="site-info">
+                            <span class="site-icon">🤖</span>
+                            <span class="site-name">Reddit</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" class="site-toggle">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="site-card" data-site="linkedin.com">
+                        <div class="site-info">
+                            <span class="site-icon">💼</span>
+                            <span class="site-name">LinkedIn</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" class="site-toggle">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="site-card" data-site="snapchat.com">
+                        <div class="site-info">
+                            <span class="site-icon">👻</span>
+                            <span class="site-name">Snapchat</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" class="site-toggle">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Add Custom Site -->
+                <div class="add-site-section">
+                    <h3>Add Custom Site</h3>
+                    <div class="add-site-form">
+                        <input type="text" id="customSiteUrl" placeholder="example.com">
+                        <button id="addCustomSite" class="btn-primary">Add Site</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Active Blocking Status -->
+            <section class="status-section">
+                <h2>Blocking Status</h2>
+                <div class="status-indicator" id="blockingStatus">
+                    <span class="status-dot inactive"></span>
+                    <span class="status-text">Not blocking</span>
+                </div>
+                
+                <div class="blocked-list" id="blockedList">
+                    <h3>Currently Blocked Sites:</h3>
+                    <ul id="blockedSitesList">
+                        <li class="empty-state">No sites blocked. Start a focus session to block selected sites.</li>
+                    </ul>
+                </div>
+            </section>
         </div>
-        <div class="field">    
-        <label for="username">Username: </label>
-            <input type="text" placeholder="Jane Doe" name="username">
-        </div>
-        <div class="field">
-            <label for="password">Password: </label>
-            <input type="password" placeholder="password" name="password">
-        </div>
-        
-        <button id="formBtn">Create Account</button>
-        
-    </form>
+
+        <footer>
+            <p>💡 Tip: Block distracting sites during your focus sessions to boost productivity!</p>
+        </footer>
+    </div>
+
+    <script src="./app.js"></script>
 </body>
-
 </html>
