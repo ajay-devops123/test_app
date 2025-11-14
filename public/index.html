@@ -3,30 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css" type="text/css" />
-    <title>Home Page</title>
+    <title>App Builder - Personal Assistant</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Hi student, Welcome to XYZ University!</h1>
-    <p>You can sign up to the platform to access all important notes & lectures.</p>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <h1 class="logo">⚡ App Builder</h1>
+            <div class="project-info">
+                <input type="text" id="projectName" placeholder="Untitled Project" class="project-name-input">
+            </div>
+        </div>
+        <div class="header-right">
+            <button class="btn btn-secondary" id="saveBtn">💾 Save</button>
+            <button class="btn btn-secondary" id="loadBtn">📂 Load</button>
+            <button class="btn btn-primary" id="exportBtn">⬇️ Export</button>
+        </div>
+    </header>
 
-    <form action="/addUser" method="POST" target="_blank" id="signupForm">
-        <div class="field">
-            <label for="email">Email: </label>
-            <input type="text" placeholder="jane@email.com" name="email">
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar - Component Library -->
+        <aside class="sidebar">
+            <h2 class="sidebar-title">Components</h2>
+            <div class="component-library">
+                <div class="component-category">
+                    <h3 class="category-title">Layout</h3>
+                    <div class="component-item" draggable="true" data-type="container">
+                        <span class="component-icon">📦</span>
+                        <span class="component-name">Container</span>
+                    </div>
+                    <div class="component-item" draggable="true" data-type="section">
+                        <span class="component-icon">📄</span>
+                        <span class="component-name">Section</span>
+                    </div>
+                </div>
+
+                <div class="component-category">
+                    <h3 class="category-title">Typography</h3>
+                    <div class="component-item" draggable="true" data-type="heading">
+                        <span class="component-icon">H</span>
+                        <span class="component-name">Heading</span>
+                    </div>
+                    <div class="component-item" draggable="true" data-type="text">
+                        <span class="component-icon">T</span>
+                        <span class="component-name">Text</span>
+                    </div>
+                </div>
+
+                <div class="component-category">
+                    <h3 class="category-title">Form Elements</h3>
+                    <div class="component-item" draggable="true" data-type="button">
+                        <span class="component-icon">🔘</span>
+                        <span class="component-name">Button</span>
+                    </div>
+                    <div class="component-item" draggable="true" data-type="input">
+                        <span class="component-icon">📝</span>
+                        <span class="component-name">Input</span>
+                    </div>
+                    <div class="component-item" draggable="true" data-type="textarea">
+                        <span class="component-icon">📋</span>
+                        <span class="component-name">Textarea</span>
+                    </div>
+                </div>
+
+                <div class="component-category">
+                    <h3 class="category-title">Media</h3>
+                    <div class="component-item" draggable="true" data-type="image">
+                        <span class="component-icon">🖼️</span>
+                        <span class="component-name">Image</span>
+                    </div>
+                    <div class="component-item" draggable="true" data-type="video">
+                        <span class="component-icon">🎥</span>
+                        <span class="component-name">Video</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Canvas Area -->
+        <main class="canvas-container">
+            <div class="canvas-toolbar">
+                <button class="toolbar-btn" id="desktopView" title="Desktop View">🖥️</button>
+                <button class="toolbar-btn" id="tabletView" title="Tablet View">📱</button>
+                <button class="toolbar-btn" id="mobileView" title="Mobile View">📱</button>
+                <div class="toolbar-divider"></div>
+                <button class="toolbar-btn" id="undoBtn" title="Undo">↶</button>
+                <button class="toolbar-btn" id="redoBtn" title="Redo">↷</button>
+                <button class="toolbar-btn" id="clearBtn" title="Clear Canvas">🗑️</button>
+            </div>
+            <div class="canvas" id="canvas">
+                <div class="canvas-placeholder">
+                    <div class="placeholder-content">
+                        <h2>👈 Drag components here to start building</h2>
+                        <p>Select components from the left sidebar and drop them on this canvas</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Properties Panel -->
+        <aside class="properties-panel">
+            <h2 class="panel-title">Properties</h2>
+            <div class="properties-content" id="propertiesContent">
+                <div class="no-selection">
+                    <p>Select a component to edit its properties</p>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Modal for Loading Projects -->
+    <div class="modal" id="loadModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Load Project</h2>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body" id="projectsList">
+                <p class="loading">Loading projects...</p>
+            </div>
         </div>
-        <div class="field">    
-        <label for="username">Username: </label>
-            <input type="text" placeholder="Jane Doe" name="username">
+    </div>
+
+    <!-- Modal for Export -->
+    <div class="modal" id="exportModal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2>Export Code</h2>
+                <button class="modal-close" id="closeExportModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="code-tabs">
+                    <button class="code-tab active" data-tab="html">HTML</button>
+                    <button class="code-tab" data-tab="css">CSS</button>
+                    <button class="code-tab" data-tab="js">JavaScript</button>
+                </div>
+                <div class="code-container">
+                    <pre id="codeOutput"><code>// Your generated code will appear here</code></pre>
+                </div>
+                <button class="btn btn-primary" id="copyCodeBtn">📋 Copy Code</button>
+            </div>
         </div>
-        <div class="field">
-            <label for="password">Password: </label>
-            <input type="password" placeholder="password" name="password">
-        </div>
-        
-        <button id="formBtn">Create Account</button>
-        
-    </form>
+    </div>
+
+    <script src="./app.js"></script>
 </body>
-
 </html>

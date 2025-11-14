@@ -1,25 +1,332 @@
-body {
-    text-align: center;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-#formBtn {
-    color: white;
-    background-color:coral;
-    border: none;
-    border-radius: 2px;
-    padding: 0.25rem 1rem;
-    margin-top: 1rem;
-    cursor: pointer;
+
+body {
+    font-family: 'Cormorant Garamond', serif;
+    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 50%, rgba(218, 165, 32, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 192, 203, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.wedding-card {
+    background: white;
+    max-width: 700px;
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    position: relative;
+    z-index: 1;
+    animation: fadeInUp 1s ease-out;
+    border: 1px solid rgba(218, 165, 32, 0.2);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.decorative-top,
+.decorative-bottom {
+    text-align: center;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+}
+
+.decorative-top {
+    border-radius: 20px 20px 0 0;
+    border-bottom: 2px solid rgba(218, 165, 32, 0.3);
+}
+
+.decorative-bottom {
+    border-radius: 0 0 20px 20px;
+    border-top: 2px solid rgba(218, 165, 32, 0.3);
+}
+
+.heart {
+    font-size: 2rem;
+    color: #DAA520;
+    animation: heartbeat 2s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.card-content {
+    padding: 3rem 2.5rem;
+}
+
+.invitation-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.together {
     font-size: 1rem;
+    color: #666;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 300;
+}
+
+.couple-names {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.bride-name,
+.groom-name {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3.5rem;
+    color: #2c3e50;
+    margin: 0.5rem 0;
+    font-weight: 400;
+    animation: fadeIn 1.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.ampersand {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: #DAA520;
+    margin: 1rem 0;
+    font-weight: 300;
+}
+
+.invitation-text {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.invite-line {
+    font-size: 1.1rem;
+    color: #555;
+    margin: 0.5rem 0;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+.wedding-details {
+    margin: 3rem 0;
+    padding: 2rem;
+    background: linear-gradient(135deg, #fdfbfb 0%, #f8f9fa 100%);
+    border-radius: 15px;
+    border: 1px solid rgba(218, 165, 32, 0.2);
+}
+
+.detail-item {
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+.detail-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.9rem;
+    color: #DAA520;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.detail-value {
+    font-size: 1.3rem;
+    color: #2c3e50;
+    font-weight: 600;
+    margin: 0.3rem 0;
+}
+
+.detail-address {
+    font-size: 1rem;
+    color: #666;
+    font-weight: 300;
+    margin-top: 0.3rem;
+}
+
+.divider {
+    text-align: center;
+    margin: 3rem 0;
+}
+
+.divider-ornament {
+    font-size: 2rem;
+    color: #DAA520;
+    opacity: 0.6;
+}
+
+.rsvp-section {
+    margin-top: 3rem;
+}
+
+.rsvp-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.rsvp-subtitle {
+    text-align: center;
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    font-style: italic;
 }
 
 form {
-    border: 2px solid grey;
-    display: inline-block;
-    padding: 2rem;
-    border-radius: 0.5rem;
-    text-align: left;
+    display: block;
+    width: 100%;
 }
 
 .field {
+    margin-bottom: 1.5rem;
+}
+
+.field label {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    color: #2c3e50;
     margin-bottom: 0.5rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.field input,
+.field select,
+.field textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: #2c3e50;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+    outline: none;
+    border-color: #DAA520;
+    box-shadow: 0 0 0 3px rgba(218, 165, 32, 0.1);
+}
+
+.field textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+#formBtn {
+    width: 100%;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #DAA520 0%, #B8860B 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    box-shadow: 0 4px 15px rgba(218, 165, 32, 0.3);
+}
+
+#formBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(218, 165, 32, 0.4);
+    background: linear-gradient(135deg, #B8860B 0%, #DAA520 100%);
+}
+
+#formBtn:active {
+    transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+    
+    .card-content {
+        padding: 2rem 1.5rem;
+    }
+    
+    .bride-name,
+    .groom-name {
+        font-size: 2.5rem;
+    }
+    
+    .ampersand {
+        font-size: 2rem;
+    }
+    
+    .rsvp-title {
+        font-size: 1.5rem;
+    }
+    
+    .wedding-details {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .bride-name,
+    .groom-name {
+        font-size: 2rem;
+    }
+    
+    .detail-value {
+        font-size: 1.1rem;
+    }
+    
+    .card-content {
+        padding: 1.5rem 1rem;
+    }
 }
